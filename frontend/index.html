@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Career Guidance Assistant</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080f24;
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #17234a 0%,
+                    #0b1229 35%,
+                    #080f24 70%
+                );
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 10px 22px;
+
+            border-bottom: 1px solid #202b48;
+
+            background: rgba(11, 18, 41, 0.95);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #27d6d8,
+                #1aa5c7
+            );
+
+            font-size: 20px;
+        }
+
+        .header h1 {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin-top: 3px;
+            font-size: 9px;
+            color: #7f91b8;
+        }
+
+        .status {
+            color: #2de1b7;
+            font-size: 18px;
+            text-shadow: 0 0 10px #2de1b7;
+        }
+
+
+        /* ================= COURSE BAR ================= */
+
+        .course-bar {
+
+            min-height: 50px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 7px 14px;
+
+            overflow-x: auto;
+
+            background: #0b132c;
+
+            border-bottom: 1px solid #202b48;
+        }
+
+        .course-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .course-bar button {
+
+            flex-shrink: 0;
+
+            border: 1px solid #293659;
+
+            background: #111a35;
+
+            color: #aab8d5;
+
+            border-radius: 20px;
+
+            padding: 7px 14px;
+
+            font-size: 10px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .course-bar button:hover {
+
+            background: #1c2b52;
+
+            color: #55e1df;
+
+            border-color: #36cbd1;
+        }
+
+
+        /* ================= CHAT AREA ================= */
+
+        .chat-area {
+
+            flex: 1;
+
+            padding: 28px 28px 100px;
+
+            overflow-y: auto;
+
+            scroll-behavior: smooth;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background: #27375d;
+            border-radius: 10px;
+        }
+
+
+        .message-row {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            margin-bottom: 18px;
+
+            max-width: 1100px;
+        }
+
+        .user-row {
+
+            margin-left: auto;
+
+            justify-content: flex-end;
+        }
+
+
+        /* ================= AVATAR ================= */
+
+        .avatar {
+
+            width: 30px;
+            height: 30px;
+
+            flex-shrink: 0;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #182543;
+
+            border: 1px solid #2c3b60;
+
+            font-size: 14px;
+        }
+
+        .user-avatar {
+
+            background: #153b4a;
+
+            border-color: #248d9d;
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        .message {
+
+            max-width: 900px;
+
+            padding: 15px 18px;
+
+            border-radius: 14px;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .bot-message {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #192544,
+                    #111b35
+                );
+
+            border: 1px solid #253454;
+
+            color: #d7def0;
+
+            border-top-left-radius: 5px;
+        }
+
+        .user-message {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #126e7d,
+                    #164d67
+                );
+
+            color: white;
+
+            border-top-right-radius: 5px;
+        }
+
+
+        /* ================= WELCOME ================= */
+
+        .welcome-box {
+
+            padding: 4px;
+        }
+
+        .welcome-box p {
+
+            margin-bottom: 9px;
+        }
+
+        .welcome-box span {
+
+            color: #2bd2d0;
+
+            font-weight: 600;
+        }
+
+
+        /* ================= COURSE DETAILS ================= */
+
+        .course-details {
+
+            max-width: 850px;
+        }
+
+        .course-title {
+
+            color: #43dedc;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+            padding-bottom: 10px;
+
+            border-bottom: 1px solid #304267;
+        }
+
+
+        .detail-section {
+
+            margin-bottom: 17px;
+        }
+
+        .detail-heading {
+
+            color: #35d7d4;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .detail-text {
+
+            color: #d7def0;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+
+        .detail-list {
+
+            padding-left: 18px;
+        }
+
+        .detail-list li {
+
+            color: #d7def0;
+
+            margin-bottom: 4px;
+
+            font-size: 12px;
+        }
+
+        .detail-list li::marker {
+
+            color: #2bd2d0;
+        }
+
+
+        .salary-box {
+
+            background: rgba(38, 210, 208, 0.08);
+
+            border: 1px solid rgba(38, 210, 208, 0.25);
+
+            padding: 10px;
+
+            border-radius: 9px;
+        }
+
+
+        .final-message {
+
+            margin-top: 15px;
+
+            color: #9fb1d3;
+
+            font-size: 12px;
+
+            font-style: italic;
+        }
+
+
+        /* ================= INPUT ================= */
+
+        .input-area {
+
+            position: fixed;
+
+            bottom: 10px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: calc(100% - 50px);
+
+            max-width: 1100px;
+
+            height: 50px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 5px 6px 5px 14px;
+
+            background: #071225;
+
+            border: 1px solid #1e2d4a;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .input-area input {
+
+            flex: 1;
+
+            height: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 12px;
+        }
+
+        .input-area input::placeholder {
+
+            color: #71809f;
+        }
+
+        .input-area button {
+
+            width: 42px;
+
+            height: 40px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #28d0d2,
+                    #1ba5bd
+                );
+
+            color: #071225;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .input-area button:hover {
+
+            transform: scale(1.05);
+        }
+
+
+        /* ================= LOADING ================= */
+
+        .loading {
+
+            color: #7f91b8;
+
+            font-size: 12px;
+
+            padding: 5px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            .header {
+
+                height: 65px;
+
+                padding: 8px 12px;
+            }
+
+            .header h1 {
+
+                font-size: 13px;
+            }
+
+            .header p {
+
+                font-size: 8px;
+            }
+
+            .logo {
+
+                width: 36px;
+                height: 36px;
+            }
+
+            .chat-area {
+
+                padding: 20px 12px 90px;
+            }
+
+            .message {
+
+                max-width: 88%;
+
+                font-size: 11px;
+            }
+
+            .course-details {
+
+                max-width: 100%;
+            }
+
+            .course-title {
+
+                font-size: 14px;
+            }
+
+            .detail-heading {
+
+                font-size: 12px;
+            }
+
+            .detail-text,
+            .detail-list li {
+
+                font-size: 11px;
+            }
+
+            .input-area {
+
+                width: calc(100% - 20px);
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo-section">
+
+            <div class="logo">
+                🎓
+            </div>
+
+            <div>
+
+                <h1>
+                    Career Guidance Assistant
+                </h1>
+
+                <p>
+                    Powered by AI • Course Details • Government Careers
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="status">
+            ●
+        </div>
+
+    </header>
+
+
+    <!-- ================= COURSE BUTTONS ================= -->
+
+    <div class="course-bar">
+
+        <button onclick="askCourse('BBA')">
+            📊 BBA
+        </button>
+
+        <button onclick="askCourse('B.Com')">
+            💼 B.Com
+        </button>
+
+        <button onclick="askCourse('BFA')">
+            🎨 BFA
+        </button>
+
+        <button onclick="askCourse('B.Des')">
+            ✏️ B.Des
+        </button>
+
+        <button onclick="askCourse('MBBS')">
+            🏥 MBBS
+        </button>
+
+        <button onclick="askCourse('B.Tech')">
+            💻 B.Tech
+        </button>
+
+        <button onclick="askCourse('Diploma')">
+            🎓 Diploma
+        </button>
+
+        <button onclick="askCourse('CA')">
+            📚 CA
+        </button>
+
+        <button onclick="askCourse('MBA')">
+            🏢 MBA
+        </button>
+
+        <button onclick="askCourse('B.Sc')">
+            🔬 B.Sc
+        </button>
+
+        <button onclick="askCourse('UPSC')">
+            🏛️ UPSC
+        </button>
+
+    </div>
+
+
+    <!-- ================= CHAT ================= -->
+
+    <main class="chat-area" id="chatArea">
+
+
+        <!-- Welcome message -->
+
+        <div class="message-row">
+
+            <div class="avatar">
+                🤖
+            </div>
+
+            <div class="message bot-message">
+
+                <div class="welcome-box">
+
+                    <p>
+                        👋
+                        <span>Welcome!</span>
+                        I'm your Career Guidance Assistant.
+                    </p>
+
+                    <p>
+                        💻
+                        Now with detailed course info —
+                        just type any course name!
+                    </p>
+
+                    <p>
+                        💡
+                        Examples:
+                        "BBA", "MBBS", "BFA",
+                        "UPSC", "B.Tech", "Diploma", "CA", "B.Sc"
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- ================= INPUT ================= -->
+
+    <div class="input-area">
+
+        <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a course name: BBA, MBBS, BFA, B.Tech, Diploma..."
+            autocomplete="off"
+        >
+
+        <button onclick="sendMessage()">
+            ➤
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    // ================================================
+    // GET ELEMENTS
+    // ================================================
+
+    const input =
+        document.getElementById("messageInput");
+
+    const chatArea =
+        document.getElementById("chatArea");
+
+
+    // ================================================
+    // ADD USER MESSAGE
+    // ================================================
+
+    function addUserMessage(message) {
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "message-row user-row";
+
+        row.innerHTML = `
+
+            <div class="message user-message">
+                ${escapeHtml(message)}
+            </div>
+
+            <div class="avatar user-avatar">
+                👤
+            </div>
+
+        `;
+
+        chatArea.appendChild(row);
+
+        scrollToBottom();
+    }
+
+
+    // ================================================
+    // ADD BOT MESSAGE
+    // ================================================
+
+    function addBotMessage(html) {
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "message-row";
+
+        row.innerHTML = `
+
+            <div class="avatar">
+                🤖
+            </div>
+
+            <div class="message bot-message">
+                ${html}
+            </div>
+
+        `;
+
+        chatArea.appendChild(row);
+
+        scrollToBottom();
+    }
+
+
+    // ================================================
+    // COURSE DETAILS
+    // ================================================
+
+    function createCourseHTML(course) {
+
+        return `
+
+        <div class="course-details">
+
+            <div class="course-title">
+                📘 ${escapeHtml(course.title)}
+            </div>
+
+
+            <!-- 1 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    1️⃣ Course Introduction
+                </div>
+
+                <div class="detail-text">
+                    ${escapeHtml(course.introduction)}
+                </div>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    2️⃣ Eligibility
+                </div>
+
+                <div class="detail-text">
+                    ${escapeHtml(course.eligibility)}
+                </div>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    3️⃣ Duration
+                </div>
+
+                <div class="detail-text">
+                    ${escapeHtml(course.duration)}
+                </div>
+
+            </div>
+<!-- 5 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    4️⃣ Entrance Exams
+                </div>
+
+                <ul class="detail-list">
+
+                    ${course.entrance.map(
+                        item => `<li>${escapeHtml(item)}</li>`
+                    ).join("")}
+
+                </ul>
+
+            </div>
+
+
+            <!-- 6 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    5️⃣ Top Career Options
+                </div>
+
+                <ul class="detail-list">
+
+                    ${course.careers.map(
+                        item => `<li>${escapeHtml(item)}</li>`
+                    ).join("")}
+
+                </ul>
+
+            </div>
+
+
+            <!-- 7 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    6️⃣ Higher Studies
+                </div>
+
+                <ul class="detail-list">
+
+                    ${course.higher.map(
+                        item => `<li>${escapeHtml(item)}</li>`
+                    ).join("")}
+
+                </ul>
+
+            </div>
+
+
+            <!-- 8 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    7️⃣ Skills Required
+                </div>
+
+                <ul class="detail-list">
+
+                    ${course.skills.map(
+                        item => `<li>${escapeHtml(item)}</li>`
+                    ).join("")}
+
+                </ul>
+
+            </div>
+
+
+            <!-- 9 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    8️⃣ Government Career Options
+                </div>
+
+                <ul class="detail-list">
+
+                    ${course.government.map(
+                        item => `<li>${escapeHtml(item)}</li>`
+                    ).join("")}
+
+                </ul>
+
+            </div>
+
+
+            <!-- 10 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    💰 9️⃣ Approx Salary / Career Scope
+                </div>
+
+                <div class="salary-box">
+
+                    ${escapeHtml(course.salary)}
+
+                    <br><br>
+
+                    <strong>Career Scope:</strong>
+
+                    ${escapeHtml(course.scope)}
+
+                </div>
+
+            </div>
+
+
+            <!-- 11 -->
+
+            <div class="detail-section">
+
+                <div class="detail-heading">
+                    📌 🔟 Course-Specific Details
+                </div>
+
+                <div class="detail-text">
+
+                    This course has multiple career paths.
+                    Students should choose specialization,
+                    higher studies and career options according
+                    to their interests and skills.
+
+                </div>
+
+            </div>
+
+
+            <div class="final-message">
+
+                🎓 Ask me about any other course or career! 😊
+
+            </div>
+
+        </div>
+
+        `;
+    }
+
+
+    // ================================================
+    // SEND MESSAGE
+    // ================================================
+
+    async function sendMessage() {
+
+        const message =
+            input.value.trim();
+
+        if (!message) {
+            return;
+        }
+
+
+        addUserMessage(message);
+
+        input.value = "";
+
+
+        // Loading
+
+        const loadingRow =
+            document.createElement("div");
+
+        loadingRow.className =
+            "message-row";
+
+        loadingRow.id =
+            "loadingMessage";
+
+        loadingRow.innerHTML = `
+
+            <div class="avatar">
+                🤖
+            </div>
+
+            <div class="message bot-message">
+
+                <div class="loading">
+                    Thinking...
+                </div>
+
+            </div>
+
+        `;
+
+        chatArea.appendChild(loadingRow);
+
+        scrollToBottom();
+
+
+        try {
+
+            const response =
+                await fetch("http://127.0.0.1:5000/chat", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        message: message
+                    })
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            // Remove loading
+
+            const loading =
+                document.getElementById(
+                    "loadingMessage"
+                );
+
+            if (loading) {
+                loading.remove();
+            }
+
+
+            if (data.found) {
+
+                addBotMessage(
+                    createCourseHTML(data.course)
+                );
+
+            } else {
+
+                addBotMessage(`
+
+                    <p>
+                        ❌
+                        ${escapeHtml(data.response)}
+                    </p>
+
+                    <p>
+                        Try:
+                        <span>
+                            BBA, B.Com, BFA, B.Des,
+                            MBBS, B.Tech, CA, MBA,
+                            B.Sc or UPSC
+                        </span>
+                    </p>
+
+                `);
+
+            }
+
+        }
+
+        catch (error) {
+
+            const loading =
+                document.getElementById(
+                    "loadingMessage"
+                );
+
+            if (loading) {
+                loading.remove();
+            }
+
+            addBotMessage(`
+
+                <p>
+                    ❌ Sorry, something went wrong.
+                </p>
+
+                <p>
+                    Please make sure the Flask server
+                    is running.
+                </p>
+
+            `);
+
+            console.error(error);
+        }
+
+    }
+
+
+    // ================================================
+    // COURSE BUTTON
+    // ================================================
+
+    function askCourse(course) {
+
+        input.value = course;
+
+        sendMessage();
+
+    }
+
+
+    // ================================================
+    // ENTER KEY
+    // ================================================
+
+    input.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+    // ================================================
+    // SCROLL
+    // ================================================
+
+    function scrollToBottom() {
+
+        setTimeout(() => {
+
+            chatArea.scrollTop =
+                chatArea.scrollHeight;
+
+        }, 100);
+
+    }
+
+
+    // ================================================
+    // SECURITY
+    // ================================================
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
